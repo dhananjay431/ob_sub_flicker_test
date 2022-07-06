@@ -1,0 +1,6 @@
+<button (click)="change()">change</button>
+<div *ngIf="{ d1: data1 | async, d2: data2 | async, d3: data3 | async } as d">
+  <pre>
+  {{ d | json }}
+  </pre>
+</div>
