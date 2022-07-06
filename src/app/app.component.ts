@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   data1:any ;
   data2:any ;
   data3:any ;
+  data4:any ;
   sub = new Subject();
   change(){
     let arr = [
@@ -22,6 +23,10 @@ export class AppComponent implements OnInit {
 
      let rn = Math.floor(Math.random() * arr.length)
      this.sub.next(arr[rn]);
+
+     let rn2 = Math.floor(Math.random() * 100)
+     this.data4 = this.gd('https://jsonplaceholder.typicode.com/todos/'+rn2);
+
   }
   time(t,d){
     let np = new Promise((a,b)=>{
@@ -36,11 +41,12 @@ export class AppComponent implements OnInit {
     this.data1 = this.gd('https://jsonplaceholder.typicode.com/todos/1');
     this.data2 = this.gd('https://jsonplaceholder.typicode.com/todos/2');
     this.data3 = this.sub.pipe(
-      mergeMap(d => this.time(5000,d)),
+      mergeMap(d => this.time(50,d)),
       mergeMap(d => {
          return this.gd('https://jsonplaceholder.typicode.com/'+d);
       })
     );
+    this.data4 = this.gd('https://jsonplaceholder.typicode.com/todos/4');
     setTimeout(()=>{
       that.sub.next('users');
     },1000)
